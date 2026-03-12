@@ -125,10 +125,27 @@
 
     <script>
         // take the reference of all elements needed
-        const createButtonRef = document.getElementById('createButton')
+        const createButtonRef = document.getElementById('createButton') 
         const todoinputRef = document.getElementById('todoinput')
-        const todocontainerRef = document.getElementById('todocontainer')
+        const todocontainerRef = document.getElementById('todocontainer');
        
+        // iffe funct = to call immediatly
+        // (function () {..})
+        // ()
+        (async ()=>{
+            fetch('https://api.freeapi.app/api/v1/public/quotes',{
+                method:'GET',
+            })
+                .then(response => response.json()) // json to obj
+                .then((data)=>{
+                    for( const obj of data.data.data){
+                        const li = document.createElement('li')
+                        li.innerText = obj.content
+                        todocontainerRef.append(li)
+                    }
+                })
+        })();
+        
         // when a user type something in input store that value to value container
         createButtonRef.addEventListener('click', function(){
             const value = todoinputRef.value;
