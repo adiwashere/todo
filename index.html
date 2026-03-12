@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        #todoinput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        #todoinput:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        #createButton {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #createButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #createButton:active {
+            transform: translateY(0);
+        }
+
+        #todocontainer {
+            list-style: none;
+        }
+
+        #todocontainer li {
+            padding: 15px;
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        #todocontainer li:hover {
+            background: #efefef;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #todocontainer li:active {
+            background: #e0e0e0;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Todo List</h1>
+        <div class="input-section">
+            <input type="text" id="todoinput" placeholder="Enter Your Task Here">
+            <button id="createButton">Create</button>
+        </div>
+
+        <ul id="todocontainer">
+            <li>Do JS</li>
+            <li>Record a video for closures</li>
+            <li>Check if she replied or not</li>
+        </ul>
+    </div>
+
+    <script>
+        // take the reference of all elements needed
+        const createButtonRef = document.getElementById('createButton')
+        const todoinputRef = document.getElementById('todoinput')
+        const todocontainerRef = document.getElementById('todocontainer')
+       
+        // when a user type something in input store that value to value container
+        createButtonRef.addEventListener('click', function(){
+            const value = todoinputRef.value;
+            
+            // now make a list (li) and add that value to list
+            const li = document.createElement('li'); // here li tag is created
+            li.innerText= value // here that value is added to li tag
+
+            // and on clicking remove that todo item
+            li.addEventListener('click', function(){
+                li.remove()
+            })
+
+            // since new list created is hanging so add this list to existing list
+            todocontainerRef.append(li)
+
+            todoinputRef.value='' // to remove text from placeholder
+        })
+    </script>
+
+
+</body>
+</html>
